@@ -11,7 +11,7 @@
     <!-- Custom styles for this template -->
 
     <script id="grid-template" type="text/x-handlebars-template">
-      <div class="col-md-4">
+      <div class="col-md-4" id="{{cid}}">
         <div class="card mb-4 shadow-sm">
           <img class="card-img-top" id="{{iid}}" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="#">
           <div class="card-body">
@@ -82,16 +82,16 @@
     </main>
     
     <script type="text/javascript">
-      var itemid = 0
+      var itemid = 0;
+      var cardid;
       function add_item() {
           itemid++;
+          cardid = "card" + itemid;
           var iname = document.getElementById('item_name').value;
-          
           var source   = document.getElementById('grid-template').innerHTML;
           var template = Handlebars.compile(source);
-          var context = {item_name: iname, iid: itemid};
+          var context = {item_name: iname, iid: itemid, cid: cardid};
           var html    = template(context);
-
           document.getElementById('gridrow').innerHTML += html;
       }
        
@@ -100,14 +100,12 @@
       function readURL(input) {
         if (input.files && input.files[0]) {
           var reader = new FileReader();
-
           reader.onload = function (e) {
             document.getElementById(itemid).src =  e.target.result;
           }
-
           reader.readAsDataURL(input.files[0]);
-          }
         }
+      }
       
       </script>
 
@@ -120,7 +118,7 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/holder.js"></script>
     <script src="js/handlebars-v4.0.12.js"></script>
-    <script src="grid.js"></script>
+    
   
 
 <svg xmlns="http://www.w3.org/2000/svg" width="348" height="225" viewBox="0 0 348 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="17" style="font-weight:bold;font-size:17pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html>
